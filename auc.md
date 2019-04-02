@@ -7,6 +7,10 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 [![Lower Back Pain Screen]({{ "/images/AUC_lower_back_pain.png" | absolute_url }})][aucbackpain]
 
+## Preliminary Appropriate Use Criteria
+
+* [Head Conditions]({{ "/grids/Cornell_AUC_-_Head_conditions_v7_recipe.html"| absolute_url }})
+
 
 <script type='text/javascript'>
 var links = document.links;
