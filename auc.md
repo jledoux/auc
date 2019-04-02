@@ -9,8 +9,13 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 ## Preliminary Appropriate Use Criteria
 
-* [Head Conditions]({{ "/grids/Cornell_AUC_-_Head_conditions_v7_recipe.html"| absolute_url }})
-
+* [Head]({{ "/grids/Cornell_AUC_-_Head_-_no_inferences_v7_recipe.html"| absolute_url }})
+* [Hip]({{ "/grids/Cornell_AUC_-_Hip_-_no_inferences_v5_recipe.html"| absolute_url }})
+* [Low Back Pain]({{ "/grids/Cornell_AUC_-_Low_Back_Pain_-_no_inferences_v11_recipe.html"| absolute_url }})
+* [Lung Cancer]({{ "/grids/Cornell_AUC_-_Lung_Cancer_-_no_inferences_v3_recipe.html"| absolute_url }})
+* [Neck Pain]({{ "/grids/Cornell_AUC_-_Neck_Pain_-_no_inferences_v4_recipe.html"| absolute_url }})
+* [Shoulder]({{ "/grids/Cornell_AUC_-_Shoulder_-_no_inferences_v8_recipe.html"| absolute_url }})
+* [Suspected PE]({{ "/grids/Cornell_AUC_-_Suspected_PE_-_no_inferences_v5_recipe.html"| absolute_url }}) ([xlsx]({{ "/grids/Cornell_AUC_-_Suspected_PE_conditions_v5.xlsx" |absolute_url}}))
 
 <script type='text/javascript'>
 var links = document.links;
