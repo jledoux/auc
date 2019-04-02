@@ -9,13 +9,13 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 ## Preliminary Release Grids and Recipe Documents for PICAT 417-419 CONCAT166
 
-[Shoulder]({{ "/grids/MS011WCI;8 Cornell AUC - Shoulder - no inferences v8 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/MS011WCI;8 Cornell AUC - Shoulder conditions v8.xlsx"|absolute_url }}))
-[Hip]({{ "/grids/MS012WCI;5 Cornell AUC - Hip - no inferences v5 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/MS012WCI;5 Cornell AUC - Hip conditions v5.xlsx"|absolute_url }}))
-[Low Back Pain]({{ "/grids/NI011WCI;11 Cornell AUC - Low Back Pain - no inferences v11 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/NI011WCI;11 Cornell AUC - Low Back Pain conditions v11.xlsx"|absolute_url }}))
-[Neck Pain]({{ "/grids/NI012WCI;4 Cornell AUC - Neck Pain - no inferences v4 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/NI012WCI;4 Cornell AUC - Neck Pain conditions v4.xlsx"|absolute_url }}))
-[Head]({{ "/grids/NI013WCI;7 Cornell AUC - Head - no inferences v7 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/NI013WCI;7 Cornell AUC - Head conditions v7.xlsx"|absolute_url }}))
-[Suspected PE]({{ "/grids/RS011WCI;5 Cornell AUC - Suspected PE - no inferences v5 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/RS011WCI;5 Cornell AUC - Suspected PE conditions v5.xlsx"|absolute_url }}))
-[Lung Cancer]({{ "/grids/RS012WCI;3 Cornell AUC - Lung Cancer - no inferences v3 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/RS012WCI;3 Cornell AUC - Lung Cancer conditions v3.xlsx"|absolute_url }}))
+* [Shoulder]({{ "/grids/MS011WCI;8 Cornell AUC - Shoulder - no inferences v8 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/MS011WCI;8 Cornell AUC - Shoulder conditions v8.xlsx"|absolute_url }}))
+* [Hip]({{ "/grids/MS012WCI;5 Cornell AUC - Hip - no inferences v5 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/MS012WCI;5 Cornell AUC - Hip conditions v5.xlsx"|absolute_url }}))
+* [Low Back Pain]({{ "/grids/NI011WCI;11 Cornell AUC - Low Back Pain - no inferences v11 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/NI011WCI;11 Cornell AUC - Low Back Pain conditions v11.xlsx"|absolute_url }}))
+* [Neck Pain]({{ "/grids/NI012WCI;4 Cornell AUC - Neck Pain - no inferences v4 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/NI012WCI;4 Cornell AUC - Neck Pain conditions v4.xlsx"|absolute_url }}))
+* [Head]({{ "/grids/NI013WCI;7 Cornell AUC - Head - no inferences v7 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/NI013WCI;7 Cornell AUC - Head conditions v7.xlsx"|absolute_url }}))
+* [Suspected PE]({{ "/grids/RS011WCI;5 Cornell AUC - Suspected PE - no inferences v5 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/RS011WCI;5 Cornell AUC - Suspected PE conditions v5.xlsx"|absolute_url }}))
+* [Lung Cancer]({{ "/grids/RS012WCI;3 Cornell AUC - Lung Cancer - no inferences v3 recipe.html"|absolute_url }}) ([xlsx]({{ "/grids/RS012WCI;3 Cornell AUC - Lung Cancer conditions v3.xlsx"|absolute_url }}))
 
 <script type='text/javascript'>
 var links = document.links;
