@@ -1,0 +1,3485 @@
+<HTML><BODY style="font-family:calibri"><h1>Cornell AUC - Shoulder - no inferences, V8</h1><p>Description: <b>Weill Cornell Imaging Appropriate Use Criteria - Shoulder - inferences not enabled</b></p><p>Domain ID: <b>MS011WCI</b></p><p>Version: <b>8</b></p><p>Date and time generated: <b>19 Mar 2019 13:26:45</b></p><h2>VERSION NOTES</h2><p>Changes made to this version:</p><ul><li>Data enabled: Decision Support Server (DSS) uses data from the EHR to determine which clinical condition applies.  DSS asks questions only if data is not already provided.</li><li>Contraindications: contraindication information can be passed in from the EHR, and DSS responds accordingly.  If any specific contraindication is not mentioned in the incoming data, DSS ask about contraindications.</li><li>DSS version 5.1.3, or later required.</li><li>Configuration of integration: for non-Epic integrations, such as Allscripts, set {skip.bpa.links} to "true", so DSS knows not to ask questions designed specifically for the Epic BPA screen.  This is an optional "config item" in the domain deployment rule.</li><li>Configuration of advice text: set {advice.text.addendum} to a string of text to be appended to the advice text.  For example, "If there are any questions on the most appropriate examination for your patient, please contact radiology consultation at ###-###-#### or abc"med.hospital.edu."   This is an optional "config item" in the domain deployment rule.</li><li>Configuration of imaging context: if applicable, set {us.expertise.available} and/or {mr.techniques.available} to "true", so that this AUC can make recommendations where Ultrasound and/or MRI are appropriate.  These are optional "config items" in the domain deployment rule.</li><li>Improvements to v7: removed check for iodinated contrast contraindication for CT arthrogram; hide the MR contraindication question when already answered;  score 4 instead of 3 in some conditions</li></ul><h2>INTRODUCTION</h2><h2>Cornell Appropriate Use Criteria</h2><p>Shoulder pain is a common musculoskeletal complaint that may be due to injuries, acute-chronic inflammation of the shoulder joint, tendons, surrounding ligaments or peri-articular structures.</p><p>Shoulder pain is frequently caused by injury to the rotator cuff and subacromial bursa.</p><p>The following guideline addresses common shoulder conditions and makes recommendations to optimize diagnostic yield.</p><P><EM><STRONG>Copyright© 2017 by Cornell University. All Rights Reserved.</STRONG></EM></P><h2>SOURCES</h2>		<ol>
+		</ol><h2>PROCEDURES</h2>
+		List of all procedures that are given appropriateness scores in this domain.
+		
+		<table border="1">
+			<tr style="background-color:rgb(255,187,51)"><th>Code</th><th>Procedure</th></tr>
+			<tr><td style="background-color:rgb(255,187,51);">CT06U3</td>
+				<td><b>CT Arthrogram Shoulder</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">CT01S1</td>
+				<td><b>CT Cervical Spine without contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">CT00U3</td>
+				<td><b>CT Shoulder with and without contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">CT00U2</td>
+				<td><b>CT Shoulder with contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">CT00U1</td>
+				<td><b>CT Shoulder without contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">MR07U3</td>
+				<td><b>MR Arthrogram Shoulder</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">MR01U1</td>
+				<td><b>MR Brachial Plexus without contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">MR00S1</td>
+				<td><b>MR Cervical Spine without contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">MR00U3</td>
+				<td><b>MR Shoulder with and without contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">MR00U2</td>
+				<td><b>MR Shoulder with contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">MR00U1</td>
+				<td><b>MR Shoulder without contrast</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">NM03V2</td>
+				<td><b>NM Bone Scan</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">US01U0</td>
+				<td><b>US Shoulder</b></td>
+			</tr>
+			<tr><td style="background-color:rgb(255,187,51);">XR00U0</td>
+				<td><b>X-ray Shoulder</b></td>
+			</tr>
+		</table><h2>LAUNCHING LOGIC</h2>
+		Launch the domain if the following applies: <table border="1">One of the following procedures is ordered:
+										
+			<table border="1">
+				<tr style="background-color:rgb(255,187,51)"><th>Code</th><th>Procedure</th></tr>
+				<tr><td style="background-color:rgb(255,187,51);">CT06U3</td>
+					<td><b>CT Arthrogram Shoulder</b></td>
+				</tr>
+				<tr><td style="background-color:rgb(255,187,51);">CT00U2</td>
+					<td><b>CT Shoulder with contrast</b></td>
+				</tr>
+				<tr><td style="background-color:rgb(255,187,51);">CT00U1</td>
+					<td><b>CT Shoulder without contrast</b></td>
+				</tr>
+				<tr><td style="background-color:rgb(255,187,51);">CT00U3</td>
+					<td><b>CT Shoulder with and without contrast</b></td>
+				</tr>
+				<tr><td style="background-color:rgb(255,187,51);">MR00U2</td>
+					<td><b>MR Shoulder with contrast</b></td>
+				</tr>
+				<tr><td style="background-color:rgb(255,187,51);">MR00U1</td>
+					<td><b>MR Shoulder without contrast</b></td>
+				</tr>
+				<tr><td style="background-color:rgb(255,187,51);">MR00U3</td>
+					<td><b>MR Shoulder with and without contrast</b></td>
+				</tr>
+				<tr><td style="background-color:rgb(255,187,51);">MR07U3</td>
+					<td><b>MR Arthrogram Shoulder</b></td>
+				</tr>
+			</table>
+		</table><h2>CLINICAL CONDITIONS</h2>
+		<ul><li>1: <b>Not shoulder pain</b></li><li>2: <b>Cancer, infection, or mass suspected, priors(X-ray not done)</b></li><li>3: <b>Cancer, infection, or mass suspected, priors(prior X-ray)</b></li><li>4: <b>Cancer, infection, or mass suspected, priors(prior X-ray), contraindications(gad)</b></li><li>5: <b>Cancer, infection, or mass suspected, priors(prior X-ray), contraindications(MR)</b></li><li>6: <b>Cancer, infection, or mass suspected, priors(prior X-ray), contraindications(gad, iod)</b></li><li>7: <b>Neck trauma, high energy or NEXUS positive, vascular injury suspected, priors(CTA) or contraindication to iodinated contrast</b></li><li>8: <b>Neck trauma, high energy or NEXUS positive, vascular injury suspected, priors(CTA) or contraindication to iodinated contrast, and contraindication to gad</b></li><li>9: <b>Neck trauma, high energy or NEXUS positive, vascular injury suspected, priors(CTA) or contraindication to iodinated contrast, and contraindication to MR</b></li><li>10: <b>Glenoid labral tear suspected, contraindications(MR)</b></li><li>11: <b>Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(US expertise)</b></li><li>12: <b>Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(US expertise), contraindications(MR)</b></li><li>13: <b>Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(no US expertise)</b></li><li>14: <b>Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(no US expertise), contraindications(MR)</b></li><li>15: <b>S/p arthroplasty, loosening suspected, priors(X-ray not done)</b></li><li>16: <b>S/p arthroplasty, loosening suspected, priors(prior X-ray, no contraindications, MR with metal reduction techniques available)</b></li><li>17: <b>S/p arthroplasty, loosening suspected, priors(prior X-ray, contraindication to MR or metal reduction techniques unavailable)</b></li><li>18: <b>Avascular necrosis suspected, priors(X-ray not done)</b></li><li>19: <b>Avascular necrosis suspected, priors(prior X-ray)</b></li><li>20: <b>Avascular necrosis suspected, priors(prior X-ray), contraindications(MR)</b></li><li>21: <b>Pre-op planning, known fracture</b></li><li>22: <b>Pre-op planning, known fracture, contraindications(MR)</b></li><li>23: <b>Heterotopic bone</b></li><li>24: <b>Heterotopic bone, contraindications(MR)</b></li><li>25: <b>Post-trauma pain, suspected fracture, priors(X-ray not done)</b></li><li>26: <b>Post-trauma pain, suspected fracture, priors(prior X-ray)</b></li><li>27: <b>Post-trauma pain, suspected fracture, priors(prior X-ray), contraindications(MR)</b></li><li>28: <b>Adhesive capsulitis</b></li><li>29: <b>Adhesive capsulitis, contraindications(MR)</b></li><li>30: <b>Inflammatory arthritis</b></li><li>31: <b>Inflammatory arthritis, contraindications(gad)</b></li><li>32: <b>Inflammatory arthritis, contraindications(MR)</b></li><li>33: <b>Cervical radiculopathy, no rotator cuff</b></li><li>34: <b>Cervical radiculopathy, no rotator cuff, contraindications(MR)</b></li><li>35: <b>Brachial plexopathy suspected</b></li><li>36: <b>Brachial plexopathy suspected, contraindications(MR)</b></li><li>37: <b>Osteoarthritis suspected, no rotator cuff, priors(X-ray not done)</b></li><li>38: <b>Osteoarthritis suspected, no rotator cuff, priors(prior X-ray)</b></li><li>39: <b>Shoulder pain without trauma, priors(X-ray not done)</b></li><li>40: <b>Shoulder pain without trauma, priors(prior X-ray)</b></li><li>41: <b>Shoulder pain without trauma, priors(prior X-ray), contraindications(MR)</b></li><li>42: <b>Insufficient indications</b></li></ul><h2>RECOMMENDATION SCORES</h2><p>Overview of scores of all clinical conditions covered by this domain.  The meaning of the scores assigned to procedure recommendations is as follows:</p>
+		<ul><li>4: appropriate - preferred</li><li>3: appropriate</li><li>2: cannot determine whether appropriate</li><li>1: inappropriate</li><li>0: condition not covered by guideline</li><li>blank: no score assigned</li></ul>
+<table border="1"><TR style="background-color:rgb(255,187,51)"><TH>#</TH><TH>Condition</TH><TH>XR</TH><TH>US</TH><TH>CT arth</TH><TH>CT w</TH><TH>CT wo</TH><TH>CT w+wo</TH><TH>MR w</TH><TH>MR wo</TH><TH>MR w+wo</TH><TH>MR arth</TH><TH>MR C-Sp wo</TH><TH>CT C-Sp wo</TH><TH>NM bone</TH><TH>MR br plex wo</TH></TR><TR><TD style="background-color:rgb(255,187,51)">1</TD><TD>Not pain</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD><TD bgcolor="grey">0</TD></TR><TR><TD style="background-color:rgb(255,187,51)">2</TD><TD>Ca/inf/mass</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">3</TD><TD>Ca/inf/mass, XR</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">4</TD><TD>Ca/inf/mass, XR (gad)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">5</TD><TD>Ca/inf/mass, XR (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">6</TD><TD>Ca/inf/mass, XR (gad, iod)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">7</TD><TD>Ca/inf/mass, XR (MR, iod)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">8</TD><TD>Labral tear</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">9</TD><TD>Labral tear (gad)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">10</TD><TD>Labral tear (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">11</TD><TD>Soft tissue</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">12</TD><TD>Soft tissue (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">13</TD><TD>Soft tissue, no US</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">14</TD><TD>Soft tissue, no US (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">15</TD><TD>Loosening</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">16</TD><TD>Loosening, XR</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">17</TD><TD>Loosening, XR (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">18</TD><TD>Necrosis</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">19</TD><TD>Necrosis, XR</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">20</TD><TD>Necrosis, XR (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">21</TD><TD>Preop</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">22</TD><TD>Preop (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">23</TD><TD>Heterotopic</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">24</TD><TD>Heterotopic (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">25</TD><TD>Trauma Fx</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">26</TD><TD>Trauma Fx, XR</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">27</TD><TD>Trauma Fx, XR (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">28</TD><TD>Capsulitis</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">29</TD><TD>Capsulitis (MR)</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD></TR><TR><TD style="background-color:rgb(255,187,51)">30</TD><TD>Arthritis</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="yellow">3</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">31</TD><TD>Arthritis (gad)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">32</TD><TD>Arthritis (MR)</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD></TR><TR><TD style="background-color:rgb(255,187,51)">33</TD><TD>Radiculopathy</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">34</TD><TD>Radiculopathy (MR)</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">35</TD><TD>Plexopathy</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD></TR><TR><TD style="background-color:rgb(255,187,51)">36</TD><TD>Plexopathy (MR)</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD></TR><TR><TD style="background-color:rgb(255,187,51)">37</TD><TD>Osteo</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">38</TD><TD>Osteo, XR</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR>
+<TR><TD style="background-color:rgb(255,187,51)">39</TD><TD>Atrauma</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">40</TD><TD>Atrauma, XR</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="lime">4</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD><TD bgcolor="red">1</TD></TR><TR><TD style="background-color:rgb(255,187,51)">41</TD><TD>Atrauma, XR (MR)</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD></TR><TR><TD style="background-color:rgb(255,187,51)">42</TD><TD>Insufficient</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD><TD bgcolor="orange">2</TD></TR>
+</table>
+
+
+
+
+<h2>QUESTIONS SCREENS</h2>
+		<ul><li>100: <b>Initial question</b></li><li>200: <b>Questions about clinical condition</b></li><li>300: <b>Questions about priors and contraindications</b></li></ul><h2>CONDITION AND QUESTIONS DETAIL</h2>
+		Decision Support Server (DSS) tests the logic of each condition, and returns the recommendation of the first condition that applies.  If none apply, DSS asks questions until the logic of one of the conditions is satisfied.
+		<H3>Condition 1: Not shoulder pain</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U12U</td>
+							<td><b>No shoulder pain</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Not covered by guidelines. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>0</td><td bgcolor="grey">not covered by guideline</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 2: Cancer, infection, or mass suspected, priors(X-ray not done)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U62U</td>
+							<td><b>X-ray shoulder not done</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Shoulder radiographs preferred for initial exam of suspected infection, cancer or masses. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 3: Cancer, infection, or mass suspected, priors(prior X-ray)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W62U</td>
+							<td><b>No gadolinium contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR shoulder with and without contrast preferred for suspected infection, cancer or masses. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 4: Cancer, infection, or mass suspected, priors(prior X-ray), contraindications(gad)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W61U</td>
+							<td><b>Gadolinium contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W66U</td>
+							<td><b>No iodinated contrast contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR shoulder without contrast preferred for suspected infection, cancer or masses in patients with contraindication to gadolinium. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 5: Cancer, infection, or mass suspected, priors(prior X-ray), contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W66U</td>
+							<td><b>No iodinated contrast contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT shoulder (without contrast OR with contrast) preferred for suspected infection, cancer or masses in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 6: Cancer, infection, or mass suspected, priors(prior X-ray), contraindications(gad, iod)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W61U</td>
+							<td><b>Gadolinium contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W65U</td>
+							<td><b>Iodinated contrast contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR shoulder without contrast preferred for suspected infection, cancer or masses in patients with contraindication to gadolinium. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 7: Neck trauma, high energy or NEXUS positive, vascular injury suspected, priors(CTA) or contraindication to iodinated contrast</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W65U</td>
+							<td><b>Iodinated contrast contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT shoulder without contrast preferred for suspected infection, cancer or masses in patients with contraindications to MR and iodinated contrast. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 8: Neck trauma, high energy or NEXUS positive, vascular injury suspected, priors(CTA) or contraindication to iodinated contrast, and contraindication to gad</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U10U</td>
+							<td><b>Glenoid labral tear suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W62U</td>
+							<td><b>No gadolinium contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR shoulder without contrast or MR Arthrogram shoulder preferred for suspected glenoid labral tear. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 9: Neck trauma, high energy or NEXUS positive, vascular injury suspected, priors(CTA) or contraindication to iodinated contrast, and contraindication to MR</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U10U</td>
+							<td><b>Glenoid labral tear suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W61U</td>
+							<td><b>Gadolinium contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR shoulder without contrast preferred for suspected glenoid labral tear in patients with contraindication to gadolinium. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 10: Glenoid labral tear suspected, contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U10U</td>
+							<td><b>Glenoid labral tear suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT Arthrogram shoulder preferred for suspected glenoid labral tear in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 11: Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(US expertise)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">Context</td>
+							<td><b>Ultrasound expertise is available</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U116U</td>
+							<td><b>Shoulder condition, soft tissue</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast or advanced ultrasound techniques are recommended for suspected rotator cuff-subacromial bursitis-impingement disorders. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 12: Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(US expertise), contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">Context</td>
+							<td><b>Ultrasound expertise is available</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U116U</td>
+							<td><b>Shoulder condition, soft tissue</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Advanced ultrasound techniques are recommended for suspected rotator cuff-subacromial bursitis-impingement disorders in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 13: Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(no US expertise)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">Context</td>
+							<td><b>Ultrasound expertise is not available</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U116U</td>
+							<td><b>Shoulder condition, soft tissue</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast is recommended for suspected rotator cuff-subacromial bursitis-impingement disorders. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 14: Rotator cuff, impingement, bursitis, or bicipital tendon suspected, priors(no US expertise), contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">Context</td>
+							<td><b>Ultrasound expertise is not available</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U116U</td>
+							<td><b>Shoulder condition, soft tissue</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT Arthrogram shoulder recommended for suspected rotator cuff-subacromial bursitis-impingement disorders in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 15: S/p arthroplasty, loosening suspected, priors(X-ray not done)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V95U</td>
+							<td><b>S/p arthroplasty, loosening suspected</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U62U</td>
+							<td><b>X-ray shoulder not done</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">X-ray recommended for initial evaluation of suspected loosening of artificial joints or hardware failure. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 16: S/p arthroplasty, loosening suspected, priors(prior X-ray, no contraindications, MR with metal reduction techniques available)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">Context</td>
+							<td><b>MR metal detection techniques are available</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V95U</td>
+							<td><b>S/p arthroplasty, loosening suspected</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT without contrast or MR without contrast (if metal-reduction techniques are available) recommended after X-rays for follow up evaluation of suspected loosening of artificial joints or hardware failure. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 17: S/p arthroplasty, loosening suspected, priors(prior X-ray, contraindication to MR or metal reduction techniques unavailable)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">Context</td>
+							<td><b>MR metal detection techniques are not available</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V95U</td>
+							<td><b>S/p arthroplasty, loosening suspected</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+					<hr><b>OR</b><br><table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V95U</td>
+							<td><b>S/p arthroplasty, loosening suspected</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT without contrast recommended after X-rays for follow up evaluation of suspected loosening of artificial joints or hardware failure. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 18: Avascular necrosis suspected, priors(X-ray not done)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U20U</td>
+							<td><b>Shoulder avascular necrosis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U62U</td>
+							<td><b>X-ray shoulder not done</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">X-ray recommended for initial evaluation of suspected avascular necrosis. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 19: Avascular necrosis suspected, priors(prior X-ray)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U20U</td>
+							<td><b>Shoulder avascular necrosis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast recommended after X-rays for follow up evaluation of suspected avascular necrosis. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 20: Avascular necrosis suspected, priors(prior X-ray), contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U20U</td>
+							<td><b>Shoulder avascular necrosis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Bone scan recommended after X-rays for follow-up evaluation of suspected avascular necrosis in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 21: Pre-op planning, known fracture</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V157U</td>
+							<td><b>Pre-operative planning</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT without contrast or MR without contrast recommended for pre-operative planning. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 22: Pre-op planning, known fracture, contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V157U</td>
+							<td><b>Pre-operative planning</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT without contrast recommended for pre-operative planning in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 23: Heterotopic bone</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U25U</td>
+							<td><b>Shoulder heterotopic bone</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT without contrast or MR without contrast recommended for the evaluation of heterotopic bone. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 24: Heterotopic bone, contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U25U</td>
+							<td><b>Shoulder heterotopic bone</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT without contrast recommended for the evaluation of heterotopic bone in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 25: Post-trauma pain, suspected fracture, priors(X-ray not done)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U62U</td>
+							<td><b>X-ray shoulder not done</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">X-ray recommended for initial evaluation of shoulder trauma. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 26: Post-trauma pain, suspected fracture, priors(prior X-ray)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast recommended after X-rays for follow-up evaluation shoulder trauma. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 27: Post-trauma pain, suspected fracture, priors(prior X-ray), contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT without contrast recommended after X-rays for follow-up evaluation shoulder trauma in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 28: Adhesive capsulitis</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">S180U</td>
+							<td><b>Adhesive capsulitis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast recommended for evaluation of adhesive capsulitis. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 29: Adhesive capsulitis, contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">S180U</td>
+							<td><b>Adhesive capsulitis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Please call radiology. Patients with adhesive capsulitis with contraindication to MR should be reviewed by a radiologist. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 30: Inflammatory arthritis</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W54U</td>
+							<td><b>Inflammatory arthritis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W62U</td>
+							<td><b>No gadolinium contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast recommended for evaluation of inflammatory arthritis. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 31: Inflammatory arthritis, contraindications(gad)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W54U</td>
+							<td><b>Inflammatory arthritis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W61U</td>
+							<td><b>Gadolinium contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast recommended for evaluation of inflammatory arthritis. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 32: Inflammatory arthritis, contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W54U</td>
+							<td><b>Inflammatory arthritis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Please call radiology. Patients with inflammatory arthritis with contraindication to MR should be reviewed by a radiologist. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 33: Cervical radiculopathy, no rotator cuff</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">S166U</td>
+							<td><b>Cervical radicular pain</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR C-spine without contrast recommended for evaluation of cervical radiculopathy. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 34: Cervical radiculopathy, no rotator cuff, contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">S166U</td>
+							<td><b>Cervical radicular pain</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">CT C-spine without contrast recommended for evaluation of cervical radiculopathy in patients with contraindication to MR. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 35: Brachial plexopathy suspected</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U7U</td>
+							<td><b>Brachial plexopathy suspected</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR brachial plexus without contrast recommended for suspected brachial plexopathy. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 36: Brachial plexopathy suspected, contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U7U</td>
+							<td><b>Brachial plexopathy suspected</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Please call radiology. Patients with suspected brachial plexopathy with contraindication to MR should be reviewed with a radiologist. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 37: Osteoarthritis suspected, no rotator cuff, priors(X-ray not done)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U29U</td>
+							<td><b>Shoulder osteoarthritis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U62U</td>
+							<td><b>X-ray shoulder not done</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">X-ray recommended for initial evaluation of suspected osteoarthritis in absence rotator cuff pathology. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 38: Osteoarthritis suspected, no rotator cuff, priors(prior X-ray)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U29U</td>
+							<td><b>Shoulder osteoarthritis suspected</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Advanced imaging for evaluation of suspected osteoarthritis in abscess of rotator cuff pathology not recommended. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Questions 100: Initial question</H3>
+		<table border="1">
+			<tr><td colspan="3">Decision support asks questions that cannot already be inferred from existing data.  In Epic integrations, it begins by asking the first underivable questions from the following list, if any.  In other integrations, it asks the first question in the list below if it cannot be inferred from existing data.</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Does the patient have shoulder pain, dislocation, fracture or rotator cuff injury?<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">U30U</td><td>Shoulder pain</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">U12U</td><td>No shoulder pain</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>What is the most important reason for imaging?<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Trauma, known fracture, or fracture suspected</b><td style="background-color:rgb(255,187,51);">U129U</td><td>Shoulder trauma, suspected fracture or pre-op for known fracture</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Cancer or infection suspected</b><td style="background-color:rgb(255,187,51);">U115U</td><td>Shoulder condition, infectious or neoplastic</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Rotator cuff, impingement, bursitis, or bicipital tendon disorder suspected</b><td style="background-color:rgb(255,187,51);">U116U</td><td>Shoulder condition, soft tissue</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Arthritis, glenoid labral tear, or avascular necrosis suspected</b><td style="background-color:rgb(255,187,51);">V186U</td><td>Arthritis, labral tear or avascular necrosis suspected</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Radiculopathy or brachial plexopathy suspected</b><td style="background-color:rgb(255,187,51);">U128U</td><td>Radiculopathy or brachial plexopathy suspected</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>S/p arthroplasty, heterotopic bone, capsulitis, or other reason</b><td style="background-color:rgb(255,187,51);">V191U</td><td>S/p arthroplasty, heterotopic bone or other reason</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Prior xray<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">U61U</td><td>X-ray shoulder completed</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">U62U</td><td>X-ray shoulder not done</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Prior xray<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">U61U</td><td>X-ray shoulder completed</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">U62U</td><td>X-ray shoulder not done</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Contraindication to imaging<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No contraindication to MR, gadolinium, or iodinated contrast</b><td style="background-color:rgb(255,187,51);">W144U</td><td>No contraindications to CT, MR, or contrast agents</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>MR contraindicated only</b><td style="background-color:rgb(255,187,51);">W180U</td><td>MR contraindication only</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Gadolinium contraindicated only</b><td style="background-color:rgb(255,187,51);">W182U</td><td>Gadolinium contraindication only</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Iodinated contrast contraindication only</b><td style="background-color:rgb(255,187,51);">W181U</td><td>Iodinated contrast contraindication only</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Multiple contraindications to MR, gadolinium, or iodinated contrast</b><td style="background-color:rgb(255,187,51);">W177U</td><td>Multiple contraindications to imaging</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Contraindication to imaging<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No contraindication to MR, gadolinium, or iodinated contrast</b><td style="background-color:rgb(255,187,51);">W144U</td><td>No contraindications to CT, MR, or contrast agents</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>MR contraindicated only</b><td style="background-color:rgb(255,187,51);">W180U</td><td>MR contraindication only</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Gadolinium contraindicated only</b><td style="background-color:rgb(255,187,51);">W182U</td><td>Gadolinium contraindication only</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Iodinated contrast contraindication only</b><td style="background-color:rgb(255,187,51);">W181U</td><td>Iodinated contrast contraindication only</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Multiple contraindications to MR, gadolinium, or iodinated contrast</b><td style="background-color:rgb(255,187,51);">W177U</td><td>Multiple contraindications to imaging</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Contraindication to MR (non MR-compatible pacemaker, aneurysm clip, cochlear implant, prosthetic heart valve, electronic pump, or stimulator)?<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">V7U</td><td>MRI contraindication</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">W55U</td><td>No MR contraindication</td></td>
+			</tr>
+		</table><H3>Questions 200: Questions about clinical condition</H3>
+		<table border="1">
+			<tr><td colspan="3">If the user submits the answers, but leaves a 'Yes' checkbox empty, it is considered to be a 'No'.</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">Infectious-neoplastic conditions</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Septic arthritis-osteomyelitis suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U19U</td><td>Septic arthritis or osteomyelitis of shoulder suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Shoulder cancer suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U21U</td><td>Shoulder cancer suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Shoulder mass</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U28U</td><td>Shoulder mass</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">Soft tissue conditions</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Rotator cuff rupture suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U16U</td><td>Rotator cuff rupture suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Impingement</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U26U</td><td>Shoulder impingement</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Subacromial bursitis suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U38U</td><td>Subacromial bursitis suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Biceps tendon disorder suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U3U</td><td>Bicipital tendon disorder suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">Bone Conditions</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Avascular necrosis suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U20U</td><td>Shoulder avascular necrosis suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Heterotopic bone</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U25U</td><td>Shoulder heterotopic bone</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">Articular conditions</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Inflammatory arthritis suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">W54U</td><td>Inflammatory arthritis suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Shoulder osteoarthritis suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U29U</td><td>Shoulder osteoarthritis suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Adhesive capsulitis</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">S180U</td><td>Adhesive capsulitis suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Glenoid labral tear suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U10U</td><td>Glenoid labral tear suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">Trauma and surgery</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Pre-operative planning</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">V157U</td><td>Pre-operative planning</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Suspected fracture</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U31U</td><td>Shoulder trauma, suspected fracture</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>S/p arthroplasty, loosening suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">V95U</td><td>S/p arthroplasty, loosening suspected</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>No recent trauma</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">W49U</td><td>No recent trauma</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">Radiculopathy and plexopathy</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Cervical radicular pain</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">S166U</td><td>Cervical radicular pain</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Brachial plexopathy suspected</b></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"><b>Yes</b><td style="background-color:rgb(255,187,51);">U7U</td><td>Brachial plexopathy suspected</td></td>
+			</tr>
+		</table><H3>Questions 300: Questions about priors and contraindications</H3>
+		<table border="1">
+			<tr><td colspan="3">Ask about priors and duration if necessary.</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">MR contraindications</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Contraindication to MR (non MR-compatible pacemaker, aneurysm clip, cochlear implant, prosthetic heart valve, electronic pump, or stimulator)?<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">V7U</td><td>MRI contraindication</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">W55U</td><td>No MR contraindication</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Contraindication to gadolinium (eGFR < 30, or severe allergy)?<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">W61U</td><td>Gadolinium contraindication</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">W62U</td><td>No gadolinium contraindication</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">CT contraindications</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>Contraindication to iodinated contrast (eGFR < 30, or severe allergy)?<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">W65U</td><td>Iodinated contrast contraindication</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">W66U</td><td>No iodinated contrast contraindication</td></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(238,85,102);"><b><i><font size="5">Imaging history</font></i></b></td>
+			</tr>
+			<tr>
+				<td colspan="3" style="background-color:rgb(255,187,51);"><b>X-ray shoulder performed recently<font color="red">*</font></b></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>Yes</b><td style="background-color:rgb(255,187,51);">U61U</td><td>X-ray shoulder completed</td></td>
+			</tr>
+			<tr>
+				<td><input type="radio"><b>No</b><td style="background-color:rgb(255,187,51);">U62U</td><td>X-ray shoulder not done</td></td>
+			</tr>
+		</table><H3>Condition 39: Shoulder pain without trauma, priors(X-ray not done)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W49U</td>
+							<td><b>No recent trauma</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U62U</td>
+							<td><b>X-ray shoulder not done</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">X-ray recommended for initial evaluation for shoulder pain without trauma. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 40: Shoulder pain without trauma, priors(prior X-ray)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W49U</td>
+							<td><b>No recent trauma</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W55U</td>
+							<td><b>No MR contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">MR without contrast recommended as follow-up of X-rays for shoulder pain without trauma. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>4</td><td bgcolor="lime">preferred</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>1</td><td bgcolor="red">inappropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 41: Shoulder pain without trauma, priors(prior X-ray), contraindications(MR)</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">W49U</td>
+							<td><b>No recent trauma</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">V7U</td>
+							<td><b>MRI contraindication</b></td>
+						</tr>
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U61U</td>
+							<td><b>X-ray shoulder completed</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">Please call radiology. Patients with shoulder pain without trauma with contraindication to MR should be reviewed by a radiologist. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table><H3>Condition 42: Insufficient indications</H3>
+		<table border="1">
+			<tr><td style="background-color:rgb(255,187,51)" valign="top">Logic.  All of the following:</td>
+				<td colspan="3">
+					<table border="1">
+						<tr>
+							<td /><td style="background-color:rgb(255,187,51);">U30U</td>
+							<td><b>Shoulder pain</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U115U</td>
+							<td><b>Shoulder condition, infectious or neoplastic</b></td>
+						</tr>
+						<tr><td>NOT</td><td style="background-color:rgb(255,187,51);">U31U</td>
+							<td><b>Shoulder trauma, suspected fracture</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,85,102);" valign="top">Advice text</td><td colspan="3">More details required - use the back button to add additional indications or consider calling radiology for advice. {advice.text.addendum}</td>
+			</tr>
+			<tr><td style="background-color:rgb(238,136,187);" valign="top">Recommendations</td>
+				<td colspan="3">
+					<table>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>X-ray Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>US Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Shoulder with and without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Arthrogram Shoulder</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>CT Cervical Spine without contrast</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>NM Bone Scan</b><br></td>
+						</tr>
+						<tr><td>3</td><td bgcolor="yellow">appropriate</td>
+							<td><b>MR Brachial Plexus without contrast</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</BODY></HTML>

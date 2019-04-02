@@ -10,17 +10,45 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
-      <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-    </section>
 
-    <section class="main-content">
+
+<header class="brand">
+  <div class="brand__nav">
+    <div class="container">
+      <div class="brand__logo">
+        <a class="text-hide" href="/" title="Home" rel="home">
+          Weill Cornell Medicine
+        </a>
+      </div>
+      <div class="menu-button">Menu</div>
+      <ul class="nav navbar-nav navbar-right global-links hidden-xs">
+  <li><a href="auc.html" >Appropriate Use Criteria</a></li>
+  <li><a href="bios.html" >Biographies</a></li>
+  <li><a href="members.html" >Members</a></li>
+  <li><a href="references.html" >References</a></li>
+  <li class="global-links__wcm"><a href="http://weill.cornell.edu/" target="_blank" class="external-link">WCM</a></li>
+  <li class="global-links__wcm"><a href="http://radiology.weill.cornell.edu/" target="_blank" class="external-link">Radiology</a></li>
+<!--  <li class="search-toggle">
+    <span class="search-toggle-button search-toggle-button--find"><svg class="cta-icon cta-icon-search"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/profiles/wcmc/themes/wcmc_bootstrap/images/cta_icons/symbol-defs.svg#cta-icon-search"></use></svg></span>
+    <span class="search-toggle-button search-toggle-button--close"><svg class="cta-icon cta-icon-close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/profiles/wcmc/themes/wcmc_bootstrap/images/cta_icons/symbol-defs.svg#cta-icon-close"></use></svg></span>
+  </li> -->
+</ul>
+    </div>
+  </div>
+    <!-- No Alt -->
+    <div class="brand__lockup hidden-xs">
+      <div class="container">
+                  <a href="/"><img src="https://radiology.weill.cornell.edu/sites/all/themes/wcm_radiology_subtheme/logo.png" alt="Department of Radiology"></a>
+              </div>
+    </div>
+  </header>
+
+    <div class='container'>
       {{ content }}
 
       <footer class="site-footer">
-        <span class="site-footer-credits">This page is hosted with <a href="https://pages.github.com">GitHub Pages</a>.</span>
+        <small><span class="site-footer-credits">This page is hosted with <a href="https://pages.github.com">GitHub Pages</a>.</span></small>
       </footer>
-    </section>
+    </div>
   </body>
 </html>
