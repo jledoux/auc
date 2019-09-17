@@ -4,7 +4,10 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 * [Headache](#headache)
 * [Hip Pain](#hip-pain)
-
+* [Lower Back Pain](#lower-back-pain)
+* [Neck Pain](#neck-pain)
+* [Pulmonary Embolism](#pulmonary-embolism)
+* [Shoulder Pain](#shoulder-pain)
 
 ### [Headache][headache]
 
