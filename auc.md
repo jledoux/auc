@@ -2,6 +2,9 @@
 
 All of the appropriate use criteria (AUC) that are approved and endorsed by Weill Cornell undergo a rigorous development and testing process.  Leveraging our institutions multidisciplinary approach to patient care, each AUC is created and approved by a multidisciplinary panel of physicians and scientists. The panels include primary care physicians, specialists, radiologists, and experts in statistics and clinical research. The evidence on which our criteria our based on are graded using established grading systems such as the Oxford classification system.  Once approved our AUC will be available for review both on our own website and as a submission to the Harvard Library of Evidence.
 
+* [Headache](#headache)
+* [Hip Pain](#hip-pain)
+
 
 ### [Headache][headache]
 
