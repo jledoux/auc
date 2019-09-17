@@ -5,7 +5,7 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 ### [Headache][headache]
 
-<iframe src="/auc_files/WCM_-_Headache_AUC_v8_Download_Final_9-17.pdf"></iframe>
+<iframe width="800" height="600" src="/auc_files/WCM_-_Headache_AUC_v8_Download_Final_9-17.pdf"></iframe>
 
 ### [Lower Back Pain][aucbackpain]
 
