@@ -15,9 +15,14 @@
 <script>
 jQuery(document).ready(function() {
    jQuery('div.menu-button').click(function() {
-    jQuery(this).addClass('is-expanded');
-    jQuery('ul.navbar-nav.global-links').removeClass('hidden-xs');
-    console.log('menu clicked');
+    if(jQuery(this).hasClass('is-expanded')) {
+      jQuery(this).removeClass('is-expanded');
+      jQuery('ul.navbar-nav.global-links').addClass('hidden-xs').removeClass('menu-sm');
+      console.log('menu unclicked');
+    } else {
+      jQuery(this).addClass('is-expanded');
+      jQuery('ul.navbar-nav.global-links').removeClass('hidden-xs').addClass('menu-sm');
+      console.log('menu clicked');
   });
 });
 </script>
