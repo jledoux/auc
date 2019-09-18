@@ -16,6 +16,7 @@
 jQuery(document).ready(function() {
    jQuery('div.menu-button').click(function() {
     $(this).addClass('is-expanded');
+    $(ul.navbar-nav.global-links').removeClass('hidden-xs');
     console.log('menu clicked');
   });
 });
