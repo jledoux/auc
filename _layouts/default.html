@@ -8,10 +8,17 @@
     <meta name="theme-color" content="#157878">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <script src="{{ '/assets/js/jquery1.7.2.min.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/jqueryui.1.10.2.min.js' | relative_url }}"></script>
+     <script src="{{ '/assets/js/jquery1.7.2.min.js' | relative_url }}"></script>
+ <!--   <script src="{{ '/assets/js/jqueryui.1.10.2.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/wcmc_header_stuff.js' | relative_url }}"></script>
- 
+-->
+<script>
+$(document).ready(function() {
+   $('div.menu-button').click(function() {
+    console.log('menu clicked');
+  });
+});
+</script>
   </head>
   <body>
 
