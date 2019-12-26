@@ -1,33 +1,63 @@
 ## Subspecialty Panel Members (with area of expertise)
 
-* [Keith Hentel, Emergency/Musculoskeletal](http://vivo.med.cornell.edu/display/cwid-keh9003)
-* [Sameer Malhotra, Internal Medicine/Informatics](http://vivo.med.cornell.edu/display/cwid-sam2032)
-* [Alvin Mushlin, Public Health](http://vivo.med.cornell.edu/display/cwid-aim2001)
-* [James Gruden, Thoracic](http://vivo.med.cornell.edu/display/cwid-jfg9007)
-* [Ian Drexler, Thoracic](http://vivo.med.cornell.edu/display/cwid-ird7002)
-* [Jessica Rotman, Emergency Medicine/Musculoskeletal](http://vivo.med.cornell.edu/display/cwid-jar9120)
-* [Rahul Sharma, Emergency](http://vivo.med.cornell.edu/display/cwid-ras2022)
-* [Josh Lantos, Neuroimaging](http://vivo.med.cornell.edu/display/cwid-jol9057)
-* [Angela Lignelli, Neuroimaging](https://www.columbiadoctors.org/angela-lignelli-md)
-* [Peter Wyer, Emergency](https://www.linkedin.com/in/peter-wyer-2549469a)
-* [Richard Lappin, Emergency/Neurology](https://weillcornell.org/rilappin)
-* [Louise Klebanoff, Neurology](http://vivo.med.cornell.edu/display/cwid-lmk9010)
-* [Brenna Farmer, Emergency Medicine](https://www.nyp.org/physician/bmfarmer)
-* [Amos Shemesh, Emergency Medicine](http://vivo.med.cornell.edu/display/cwid-ajs9039)
-* [Alfred Gellhorn - Physical and Rehabilitation Medicine](https://weillcornell.org/acgellhorn)
-* [Dougas Mintz, Musculoskeletal Imaging](https://www.hss.edu/physicians_mintz-douglas.asp)
-* [Jacob Kazam, Emergency/Musculoskeletal Imaging](https://weillcornell.org/j-jacob-kazam-md)
-* [Jonathan Kazam, Emergency/Musculoskeletal Imaging](https://www.nyp.org/physician/jkazam)
-* [Joshua Weintraub, Vascular/Interventional Radiology](https://www.nyp.org/physician/jlweintraub)
-* [Natasha Desai, Emergency/Sports Medicine](http://vesta.cumc.columbia.edu/ortho/facdb/profile/profile.php?id=nd2498)
-* [Biren Bhatt, Emergency Medicine](https://www.nyp.org/physician/babhatt)
-* [Fereshteh Sani, Emergency Medicine](https://www.nyp.org/physician/fsani)
-* [Richard Trepp, Emergency Medicine](https://www.nyp.org/physician/rctrepp)
-* [Andrew Einstein, Cardiac Imaging](https://www.nyp.org/physician/ajeinstein)
-* [James Min, Cardiac Imaging](http://vivo.med.cornell.edu/display/cwid-jkm2001)
-* [Jonathan Weinsaft, Cardiac Imaging](http://vivo.med.cornell.edu/display/cwid-jww2001)
-* [Quynh Truong, Cardiac Imaging](http://vivo.med.cornell.edu/display/cwid-qat9001)
-* [Robert Kim, Cardiology](https://weillcornell.org/robertjkim)
+Our panels are comprised of experts from Weill Cornell Medicine and our partners at Columbia Doctors and New York-Presbyterian Hospital.
+
+
+### Emergency
+* [Brenna Farmer, Emergency Medicine](https://weillcornell.org/bmfarmer) <sup>1</sup>
+* [Keith Hentel, Imaging](https://weillcornell.org/khentel) <sup>1</sup>
+* [Jacob Kazam, Imaging](https://weillcornell.org/j-jacob-kazam-md) <sup>1</sup>
+* [Richard Lappin, Emergency Medicine](https://weillcornell.org/rilappin) <sup>1</sup>
+* [Phillip Perera, Emergency Medicine](http://vivo.med.cornell.edu/display/cwid-pererap) <sup>1</sup>
+* [Jessica Rotman, Imaging](https://weillcornell.org/jessica-rotman-md) <sup>1</sup>
+* [Rahul Sharma, Emergency Medicine](https://weillcornell.org/rsharma) <sup>1</sup>
+* [Amos Shemesh, Emergency Medicine](http://vivo.med.cornell.edu/display/cwid-ajs9039) <sup>1</sup>
+* [Joseph Underwood, Emergency Medicine](https://www.nyp.org/cancer/physician/junderwood) <sup>1</sup>
+* [Peter Wyer, Emergency Medicine](https://www.linkedin.com/in/peter-wyer-2549469a) <sup>1</sup>
+* [Richard Trepp, Emergency Medicine](https://www.nyp.org/physician/rctrepp) <sup>1</sup>
+
+### Internal Medicine
+* [Sameer Malhotra, Internal Medicine](http://vivo.med.cornell.edu/display/cwid-sam2032) <sup>1</sup>
+* [Alvin Mushlin, Internal Medicine](http://vivo.med.cornell.edu/display/cwid-aim2001) <sup>1</sup>
+
+### Musculoskeletal
+* [Alfred Gellhorn - Physical and Rehabilitation Medicine](https://weillcornell.org/acgellhorn) <sup>1</sup>
+* [Jacob Kazam, Imaging](https://weillcornell.org/j-jacob-kazam-md) <sup>1</sup>
+* [Jonathan Kazam, Imaging](https://www.nyp.org/physician/jkazam) <sup>1</sup>
+* [Dean Lorich, Orthopedics](http://vivo.med.cornell.edu/display/person656074) <sup>1</sup>
+* [Doug Mintz, Musculoskeletal Imaging](https://www.hss.edu/physicians_mintz-douglas.asp) <sup>1</sup>
+* [Jessica Rotman, Imaging](http://vivo.med.cornell.edu/display/cwid-jar9120) <sup>1</sup>
+
+### Neurosciences
+* [Louise Klebanoff, Neurology](http://vivo.med.cornell.edu/display/cwid-lmk9010) <sup>1</sup>
+* [Josh Lantos, Neuroimaging](http://vivo.med.cornell.edu/display/cwid-jol9057) <sup>1</sup>
+* [Richard Lappin, Emergency Medicine](https://weillcornell.org/rilappin) <sup>1</sup>
+* [Laura Lennihan, Neurology](https://www.nyp.org/physician/llennihan) <sup>1</sup>
+* [Angela Lignelli, Neuroimaging](https://www.columbiadoctors.org/angela-lignelli-md) <sup>1</sup>
+
+### Thoracic
+* [Ian Drexler, Thoracic](http://vivo.med.cornell.edu/display/cwid-ird7002) <sup>1</sup>
+* [James Gruden, Thoracic](http://vivo.med.cornell.edu/display/cwid-jfg9007) <sup>1</sup>
+* [Bradley Pua, Imaging / Intervention](http://vivo.med.cornell.edu/display/cwid-brp9018) <sup>1</sup>
+* [Joshua Weintraub, Imaging / Intervention](https://www.nyp.org/physician/jlweintraub) <sup>1</sup>
+
+### Information/Clinical Sciences
+* [Gary Dorfman, Research / Clinical Trials](http://vivo.med.cornell.edu/display/cwid-gsd2005)
+* [Alvin Mushlin, Research / Clinical Trials / Public Health](http://vivo.med.cornell.edu/display/cwid-aim2001) <sup>1</sup>
+* [Sameer Malhotra, Informatics](http://vivo.med.cornell.edu/display/cwid-sam2032) <sup>1</sup>
+* [George Shih, Informatics](http://vivo.med.cornell.edu/display/cwid-ges9006) <sup>1</sup>
+* [Chandan Prithani, Information Technology](https://www.linkedin.com/in/chandan-prithiani-a68b434) <sup>1</sup>
+
+<!-- * [Natasha Desai, Emergency/Sports Medicine](http://vesta.cumc.columbia.edu/ortho/facdb/profile/profile.php?id=nd2498) <sup>1</sup>
+* [Biren Bhatt, Emergency Medicine](https://www.nyp.org/physician/babhatt) <sup>1</sup>
+* [Fereshteh Sani, Emergency Medicine](https://www.nyp.org/physician/fsani) <sup>1</sup> -->
+<!-- * [Andrew Einstein, Cardiac Imaging](https://www.nyp.org/physician/ajeinstein) <sup>1</sup>
+* [James Min, Cardiac Imaging](http://vivo.med.cornell.edu/display/cwid-jkm2001) <sup>1</sup>
+* [Jonathan Weinsaft, Cardiac Imaging](http://vivo.med.cornell.edu/display/cwid-jww2001) <sup>1</sup>
+* [Quynh Truong, Cardiac Imaging](http://vivo.med.cornell.edu/display/cwid-qat9001) <sup>1</sup>
+* [Robert Kim, Cardiology](https://weillcornell.org/robertjkim) <sup>1</sup> -->
+
+<sup>1</sup> No Conflicts of Interest Reported.
 
 <script type='text/javascript'>
 var links = document.links;
