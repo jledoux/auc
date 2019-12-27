@@ -11,14 +11,14 @@ Our panels are comprised of experts from Weill Cornell Medicine and our partners
 * [Phillip Perera, Emergency Medicine](http://vivo.med.cornell.edu/display/cwid-pererap) <sup>1</sup>
 * [Jessica Rotman, Imaging](https://weillcornell.org/jessica-rotman-md) <sup>1</sup>
 * [Rahul Sharma, Emergency Medicine](https://weillcornell.org/rsharma) <sup>1</sup>
-* [Amos Shemesh, Emergency Medicine](http://vivo.med.cornell.edu/display/cwid-ajs9039) <sup>1</sup>
-* [Joseph Underwood, Emergency Medicine](https://www.nyp.org/cancer/physician/junderwood) <sup>1</sup>
-* [Peter Wyer, Emergency Medicine](https://www.linkedin.com/in/peter-wyer-2549469a) <sup>1</sup>
-* [Richard Trepp, Emergency Medicine](https://www.nyp.org/physician/rctrepp) <sup>1</sup>
+* [Amos Shemesh, Emergency Medicine](https://weillcornell.org/amos-shemesh-md) <sup>1</sup>
+* [Joseph Underwood, Emergency Medicine](https://www.nyp.org/physician/junderwood) <sup>1</sup>
+* [Peter Wyer, Emergency Medicine](https://www.emergencymedicine.columbia.edu/profile/peter-c-wyer-md) <sup>1</sup>
+* [Richard Trepp, Emergency Medicine](https://www.columbiadoctors.org/richard-c-trepp-md) <sup>1</sup>
 
 ### Internal Medicine
-* [Sameer Malhotra, Internal Medicine](http://vivo.med.cornell.edu/display/cwid-sam2032) <sup>1</sup>
-* [Alvin Mushlin, Internal Medicine](http://vivo.med.cornell.edu/display/cwid-aim2001) <sup>1</sup>
+* [Sameer Malhotra, Internal Medicine](https://weillcornell.org/smalhotra) <sup>1</sup>
+* [Alvin Mushlin, Internal Medicine](https://weillcornell.org/amushlin) <sup>1</sup>
 
 ### Musculoskeletal
 * [Alfred Gellhorn - Physical and Rehabilitation Medicine](https://weillcornell.org/acgellhorn) <sup>1</sup>
@@ -26,26 +26,26 @@ Our panels are comprised of experts from Weill Cornell Medicine and our partners
 * [Jonathan Kazam, Imaging](https://www.nyp.org/physician/jkazam) <sup>1</sup>
 * [Dean Lorich, Orthopedics](http://vivo.med.cornell.edu/display/person656074) <sup>1</sup>
 * [Doug Mintz, Musculoskeletal Imaging](https://www.hss.edu/physicians_mintz-douglas.asp) <sup>1</sup>
-* [Jessica Rotman, Imaging](http://vivo.med.cornell.edu/display/cwid-jar9120) <sup>1</sup>
+* [Jessica Rotman, Imaging](https://weillcornell.org/jessica-rotman-md) <sup>1</sup>
 
 ### Neurosciences
-* [Louise Klebanoff, Neurology](http://vivo.med.cornell.edu/display/cwid-lmk9010) <sup>1</sup>
-* [Josh Lantos, Neuroimaging](http://vivo.med.cornell.edu/display/cwid-jol9057) <sup>1</sup>
+* [Louise Klebanoff, Neurology](https://weillcornell.org/lklebanoff) <sup>1</sup>
+* [Joshua Lantos, Neuroimaging](https://weillcornell.org/jlantos) <sup>1</sup>
 * [Richard Lappin, Emergency Medicine](https://weillcornell.org/rilappin) <sup>1</sup>
 * [Laura Lennihan, Neurology](https://www.nyp.org/physician/llennihan) <sup>1</sup>
 * [Angela Lignelli, Neuroimaging](https://www.columbiadoctors.org/angela-lignelli-md) <sup>1</sup>
 
 ### Thoracic
 * [Ian Drexler, Thoracic](http://vivo.med.cornell.edu/display/cwid-ird7002) <sup>1</sup>
-* [James Gruden, Thoracic](http://vivo.med.cornell.edu/display/cwid-jfg9007) <sup>1</sup>
-* [Bradley Pua, Imaging / Intervention](http://vivo.med.cornell.edu/display/cwid-brp9018) <sup>1</sup>
+* [James Gruden, Thoracic](https://weillcornell.org/jfgruden) <sup>1</sup>
+* [Bradley Pua, Imaging / Intervention](https://weillcornell.org/bpua) <sup>1</sup>
 * [Joshua Weintraub, Imaging / Intervention](https://www.nyp.org/physician/jlweintraub) <sup>1</sup>
 
 ### Information/Clinical Sciences
 * [Gary Dorfman, Research / Clinical Trials](http://vivo.med.cornell.edu/display/cwid-gsd2005)
-* [Alvin Mushlin, Research / Clinical Trials / Public Health](http://vivo.med.cornell.edu/display/cwid-aim2001) <sup>1</sup>
-* [Sameer Malhotra, Informatics](http://vivo.med.cornell.edu/display/cwid-sam2032) <sup>1</sup>
-* [George Shih, Informatics](http://vivo.med.cornell.edu/display/cwid-ges9006) <sup>1</sup>
+* [Alvin Mushlin, Research / Clinical Trials / Public Health](https://weillcornell.org/amushlin) <sup>1</sup>
+* [Sameer Malhotra, Informatics](https://weillcornell.org/smalhotra) <sup>1</sup>
+* [George Shih, Informatics](https://weillcornell.org/gshih) <sup>1</sup>
 * [Chandan Prithani, Information Technology](https://www.linkedin.com/in/chandan-prithiani-a68b434) <sup>1</sup>
 
 <!-- * [Natasha Desai, Emergency/Sports Medicine](http://vesta.cumc.columbia.edu/ortho/facdb/profile/profile.php?id=nd2498) <sup>1</sup>
