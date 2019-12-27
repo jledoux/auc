@@ -11,37 +11,37 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 ### [Headache][headache]
 
-<object width="80%" height="900" src="auc_files/WCM_-_Headache__AUC_v9.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_Headache__AUC_v9.pdf"></object>
 
 [Download PDF][headache]
 
 ### [Hip Pain][hippain]
 
-<object width="80%" height="900" src="auc_files/WCM_-_Hip_Pain_AUC_v6.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_Hip_Pain_AUC_v6.pdf"></object>
 
 [Download PDF][hippain]
 
 ### [Lower Back Pain][lowerbackpain]
 
-<object width="80%" height="900" src="auc_files/WCM_-_LBP_AUC_v11_Download_Final_9-16.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_LBP_AUC_v11_Download_Final_9-16.pdf"></object>
 
 [Download PDF][lowerbackpain]
 
 ### [Neck Pain][neckpain]
 
-<object width="80%" height="900" src="auc_files/WCM_-_Neck_Pain_AUC_v4.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_Neck_Pain_AUC_v4.pdf"></object>
 
 [Download PDF][neckpain]
 
 ### [Pulmonary Embolism][pe]
 
-<object width="80%" height="900" src="auc_files/WCM_-_PE_AUC_Download_v5_Final_9-15.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_PE_AUC_Download_v5_Final_9-15.pdf"></object>
 
 [Download PDF][pe]
 
 ### [Shoulder Pain][shoulder]
 
-<object width="80%" height="900" src="auc_files/WCM_-_Shoulder_Pain_AUC_v8_Download_Final_9-17.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_Shoulder_Pain_AUC_v8_Download_Final_9-17.pdf"></object>
 
 [Download PDF][shoulder]
 
