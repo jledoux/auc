@@ -1,4 +1,4 @@
-## Conflict of Interest - Biography Statements
+## Leadership
 
 All members of the Weill Cornell Imaging Appropriate Use program are required to declare conflicts of interest on an annual basis for any time period in which they are participating in the creation or modification of appropriate use criteria. Individual conflicts are listed below:
 
@@ -10,6 +10,11 @@ All members of the Weill Cornell Imaging Appropriate Use program are required to
 * [Peter Wyer]({{ "bios/Peter Wyer, MD.pdf" | absolute_url }})
 * [Courtney Yeager]({{ "bios/Courtney L. Yeager_AUC_COI, MS, RRA, RT(R), RDMS, CN-BI.pdf" | absolute_url }})
 * [Thomas Jessen]({{ "bios/Thomas S Jessen, JD.pdf" | absolute_url }})
+* Jessica Rotman
+* George Shih
+* Joshua Weintraub
+* Ramin Khorasani
+* Ali Raja
 
 <script type='text/javascript'>
 var links = document.links;
