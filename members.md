@@ -32,14 +32,14 @@ Our panels are comprised of experts from Weill Cornell Medicine and our partners
 * [Louise Klebanoff, Neurology](https://weillcornell.org/lklebanoff) <sup>1</sup>
 * [Joshua Lantos, Neuroimaging](https://weillcornell.org/jlantos) <sup>1</sup>
 * [Richard Lappin, Emergency Medicine](https://weillcornell.org/rilappin) <sup>1</sup>
-* [Laura Lennihan, Neurology](https://www.nyp.org/physician/llennihan) <sup>1</sup>
+* [Laura Lennihan, Neurology](https://www.columbiadoctors.org/laura-lennihan-md) <sup>1</sup>
 * [Angela Lignelli, Neuroimaging](https://www.columbiadoctors.org/angela-lignelli-md) <sup>1</sup>
 
 ### Thoracic
 * [Ian Drexler, Thoracic](http://vivo.med.cornell.edu/display/cwid-ird7002) <sup>1</sup>
 * [James Gruden, Thoracic](https://weillcornell.org/jfgruden) <sup>1</sup>
 * [Bradley Pua, Imaging / Intervention](https://weillcornell.org/bpua) <sup>1</sup>
-* [Joshua Weintraub, Imaging / Intervention](https://www.nyp.org/physician/jlweintraub) <sup>1</sup>
+* [Joshua Weintraub, Imaging / Intervention](https://www.columbiadoctors.org/joshua-l-weintraub-md) <sup>1</sup>
 
 ### Information/Clinical Sciences
 * [Gary Dorfman, Research / Clinical Trials](http://vivo.med.cornell.edu/display/cwid-gsd2005)
