@@ -4,7 +4,7 @@ All members of the Weill Cornell Imaging Appropriate Use program are required to
 
 
 * [Keith Hentel]({{ "bios/Keith Hentel, MD, MS.pdf" | absolute_url }})
-* [Sameer Malhotra]({{ "bios/Sameer Malholta, MD, MA.pdf" | absolute_url }})
+* [Sameer Malhotra]({{ "bios/Sameer Malhotra, MD, MA.pdf" | absolute_url }})
 * [Alvin Mushlin]({{ "bios/Alvin I Mushlin, MD, ScM.pdf" | absolute_url }})
 * [Amos Shemesh]({{ "bios/Amos Shemesh, MD.pdf" | absolute_url }})
 * [Peter Wyer]({{ "bios/Peter Wyer, MD.pdf" | absolute_url }})

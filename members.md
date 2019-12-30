@@ -42,7 +42,7 @@ Our panels are comprised of experts from Weill Cornell Medicine and our partners
 * [Joshua Weintraub, Imaging / Intervention](https://www.columbiadoctors.org/joshua-l-weintraub-md) <sup>1</sup>
 
 ### Information/Clinical Sciences
-* [Gary Dorfman, Research / Clinical Trials](http://vivo.med.cornell.edu/display/cwid-gsd2005)
+* [Gary Dorfman, Research / Clinical Trials](http://vivo.med.cornell.edu/display/cwid-gsd2005) <sup>1</sup>
 * [Alvin Mushlin, Research / Clinical Trials / Public Health](https://weillcornell.org/amushlin) <sup>1</sup>
 * [Sameer Malhotra, Informatics](https://weillcornell.org/smalhotra) <sup>1</sup>
 * [George Shih, Informatics](https://weillcornell.org/gshih) <sup>1</sup>
