@@ -3,9 +3,13 @@
 ## Title(s):
 
 Associate Professor of Clinical Radiology,
+
 Executive Vice Chairman, Department of Radiology
+
 Chair, Quality Assurance/Quality Improvement, Weill Cornell Imaging at NewYork-Presbyterian
+
 Chair, Patient Access/Experience, Weill Cornell Physicians Organization
+
 Weill Cornell Medicine New York-Presbyterian Hospital
 
 ## Brief Bio: 

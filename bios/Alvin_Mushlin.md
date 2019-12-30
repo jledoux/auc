@@ -4,7 +4,7 @@
 
 Professor of Healthcare Policy and Research, and of Medicine
 
-##Brief Bio:
+## Brief Bio:
 
 Training and expertise in clinical health services research and clinical epidemiology.
 

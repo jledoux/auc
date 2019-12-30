@@ -8,7 +8,7 @@ Medical Director of Informatics, Weill Cornell Medicine
 
 Attending Physician Internal Medicine, New York Presbyterian Hospital, New York
 
-##Brief Bio:
+## Brief Bio:
 
 I have been in the field of clinical research and biomedical informatics for the past 10 years during which
 I have fulfilled roles pertaining to applied clinical informatics while maintaining an active research and
