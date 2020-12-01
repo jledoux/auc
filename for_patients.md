@@ -11,23 +11,14 @@ Guidelines for the CMS AUC program may be found on this website with information
 For the CMS AUC program, Weill Cornell has created criteria for imaging when patients have one or more of the following:
 
 * Headache
-
 * Head Trauma
-
 * Neck Pain
-
 * Neck Trauma
-
 * Known or Suspected Lung Cancer
-
 * Lung Cancer Screening
-
 * Lung Nodules
-
 * Suspected Pulmonary Embolism
-
 * Shoulder Pain
-
 * Hip Pain
 
 ### Frequently Asked Questions (FAQs)
@@ -44,7 +35,7 @@ AUCs are the guidelines that CDS uses when providing advice for imaging studies.
 
 In 2014, Congress passed the Protecting Access to Medicare Act of 2014 (PAMA) which among other things mandates the use of CDS/AUC for Medicare patients with orders for certain types of imaging (e.g. Computed Tomography (CT), Magnetic Resonance Imaging (MRI), etc.). This will begin in 2022. CMS has provided guidance on what specific clinical conditions need to be covered. More information of the CMS AUC program may be found at:
 
-https://www.cms.gov/Medicare/Quality-Initiatives-Patient-Assessment-Instruments/Appropriate-Use-Criteria-Program
+[https://www.cms.gov/Medicare/Quality-Initiatives-Patient-Assessment-Instruments/Appropriate-Use-Criteria-Program](https://www.cms.gov/Medicare/Quality-Initiatives-Patient-Assessment-Instruments/Appropriate-Use-Criteria-Program)
 
 #### What is a Provider Led Entity (PLE)?
 
@@ -64,5 +55,5 @@ It is important to remember that even criteria that use many factors may not app
 
 In our experience, most physicians order the most appropriate imaging almost all the time. They learn to do so through years of training and experience. If you have any questions, you should ask your provider about why they have ordered a specific examination.
 
-Even with CDS you or your provider may still have questions on the most appropriate imaging examination(s). Providers and patients are encouraged to reach out to our practice through our radiology consultation service (RCS) at 646-962-2273-or radconsult@med.cornell.edu
+Even with CDS you or your provider may still have questions on the most appropriate imaging examination(s). Providers and patients are encouraged to reach out to our practice through our radiology consultation service (RCS) at [646-962-2273](tel:6469622273) or [radconsult@med.cornell.edu](mailto:radconsult@med.cornell.edu)
 
