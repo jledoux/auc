@@ -50,7 +50,7 @@ Weill Cornell AUC are intended to be guidelines and do not apply to every indivi
 
 Providers will not be penalized for specific cases that do not agree with the recommendations provided by our AUC. In the future, CMS may look at providers who are true outliers in regard to appropriateness of imaging
 
-If your patients have questions about the AUC program, patient information including Frequently Asked Questions is available on our [For Patients page](for_patients.html).
+If your patients have questions about the AUC program, patient information including Frequently Asked Questions is available on our [For Patients page](./for_patients.html).
 
 Weill Cornell is always looking to improve our AUC. Please provide any feedback at:
 
