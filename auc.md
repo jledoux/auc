@@ -5,6 +5,7 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 * [Headache](#headache)
 * [Hip Pain](#hip-pain)
 * [Lower Back Pain](#lower-back-pain)
+* [Lung Cancer Screening](#lung-cancer-screening)
 * [Neck Pain](#neck-pain)
 * [Pulmonary Embolism](#pulmonary-embolism)
 * [Shoulder Pain](#shoulder-pain)
@@ -17,7 +18,7 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 ### [Hip Pain][hippain]
 
-<object width="80%" height="900" data="auc_files/WCM_-_Hip_Pain_AUC_v6.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_Hip_Pain_AUC_v9.pdf"></object>
 
 [Download PDF][hippain]
 
@@ -26,6 +27,12 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 <object width="80%" height="900" data="auc_files/WCM_-_LBP_AUC_v11_Download_Final_9-16.pdf"></object>
 
 [Download PDF][lowerbackpain]
+
+### [Lung Cancer Screening][lungcancerscreening]
+
+<object width="80%" height="900" data="auc_files/WCM_-_LCS_AUC_v8.pdf"></object>
+
+[Download PDF][lungcancerscreening]
 
 ### [Neck Pain][neckpain]
 
@@ -41,7 +48,7 @@ All of the appropriate use criteria (AUC) that are approved and endorsed by Weil
 
 ### [Shoulder Pain][shoulder]
 
-<object width="80%" height="900" data="auc_files/WCM_-_Shoulder_Pain_AUC_v8_Download_Final_9-17.pdf"></object>
+<object width="80%" height="900" data="auc_files/WCM_-_Shoulder_Pain_AUC_v8.pdf"></object>
 
 [Download PDF][shoulder]
 
@@ -58,8 +65,9 @@ for (var i = 0; i < links.length; i++) {
 
   [aucbackpain]: https://docs.google.com/spreadsheets/d/1fGB72y4sQ1a4cjbkFmkx7XH1p6dprUG_36_3hLZ-wOU/edit#gid=813947164
   [headache]: /auc_files/WCM_-_Headache__AUC_v9.pdf
-  [hippain]: /auc_files/WCM_-_Hip_Pain_AUC_v6.pdf
+  [hippain]: /auc_files/WCM_-_Hip_Pain_AUC_v9.pdf
   [lowerbackpain]: /auc_files/WCM_-_LBP_AUC_v11_Download_Final_9-16.pdf
+  [lungcancerscreening]: /auc_files/WCM_-_LCS_AUC_v8.pdf
   [neckpain]: /auc_files/WCM_-_Neck_Pain_AUC_v4.pdf
   [pe]: /auc_files/WCM_-_PE_AUC_Download_v5_Final_9-15.pdf
-  [shoulder]: /auc_files/WCM_-_Shoulder_Pain_AUC_v8_Download_Final_9-17.pdf
+  [shoulder]: /auc_files/WCM_-_Shoulder_Pain_AUC_v8.pdf
