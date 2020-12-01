@@ -8,7 +8,7 @@ The Centers for Medicare & Medicaid Services (CMS) have designated specific orga
 
 Guidelines for the CMS AUC program may be found on this website with information on the scientific studies that were used to determine what diagnostic imaging, if any, is recommended for the medical condition(s) of concern when imaging is ordered. This website includes members of the teams who were part of the creation process. Each member of the team is required to list any conflict of interest they may have in relation to the guidelines which they worked on.
 
-For the CMS AUC program, Weill Cornell has created criteria for imaging when patients have one or more of the following:
+For the CMS AUC program, Weill Cornell has created [criteria for imaging](./auc.html) when patients have one or more of the following:
 
 * Headache
 * Head Trauma

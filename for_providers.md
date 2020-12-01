@@ -6,11 +6,11 @@ Additional information on the CMS AUC program may be found on the CMS website
 
 [https://www.cms.gov/Medicare/Quality-Initiatives-Patient-Assessment-Instruments/Appropriate-Use-Criteria-Program](https://www.cms.gov/Medicare/Quality-Initiatives-Patient-Assessment-Instruments/Appropriate-Use-Criteria-Program)
 
-The program is summarized in the Annals of Internal Medicine:
+The program is [summarized in the Annals of Internal Medicine](https://doi.org/10.7326/M19-0287):
 
-*“What Physicians and Health Organizations Should Know About Mandated Imaging Appropriate Use Criteria.”* Ann Intern Med. 2019 Jun 18;170(12):880-885.
+*“What Physicians and Health Organizations Should Know About Mandated Imaging Appropriate Use Criteria.”* Ann Intern Med. 2019 Jun 18;170(12):880-885. 
 
-[https://doi.org/10.7326/M19-0287](https://doi.org/10.7326/M19-0287)
+[doi:10.7326/M19-0287](https://doi.org/10.7326/M19-0287)
 
 The program requires AUC cover at a minimum eight priority clinical areas (PCA) : Headache (Traumatic & Non-Traumatic), Neck Pain (Traumatic & Non-Traumatic), Shoulder Pain, Hip Pain, Lung Cancer, Suspected Pulmonary Embolism, Suspected Coronary Artery Disease, and Low Back Pain.
 
@@ -18,26 +18,17 @@ The Centers for Medicare & Medicaid Services (CMS) have designated specific orga
 
 When placing orders for advanced imaging, providers need to consult a Qualified Decision Support Mechanism (QDSM). These may be integrated with your Computerized Order Entry (COE) or available as stand alone systems.
 
-For the CMS AUC program, Weill Cornell has created AUC for the following:
+For the CMS AUC program, Weill Cornell has created [AUC](./auc.html) for the following:
 
 * Headache
-
 * Head Trauma
-
 * Neck Pain
-
 * Neck Trauma
-
 * Known or Suspected Lung Cancer
-
 * Lung Cancer Screening
-
 * Lung Nodules
-
 * Suspected Pulmonary Embolism
-
 * Shoulder Pain
-
 * Hip Pain
 
 These AUC are available on this website including the current version of the AUC, members of the subspecialty panel(s) that contributed to the AUC, any conflicts of interest that members may have, references to the scientific literature used in developing the AUC, and a grading of the evidenced based recommendation. Weill Cornell has adopted two evidenced based grading systems: Oxford and [add other].
