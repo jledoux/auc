@@ -31,7 +31,7 @@ For the CMS AUC program, Weill Cornell has created [AUC](./auc.html) for the fol
 * Shoulder Pain
 * Hip Pain
 
-These AUC are available on this website including the current version of the AUC, members of the subspecialty panel(s) that contributed to the AUC, any conflicts of interest that members may have, references to the scientific literature used in developing the AUC, and a grading of the evidenced based recommendation. Weill Cornell has adopted two evidenced based grading systems: Oxford and [add other].
+These AUC are available on this website including the current version of the AUC, members of the subspecialty panel(s) that contributed to the AUC, any conflicts of interest that members may have, references to the scientific literature used in developing the AUC, and a grading of the evidenced based recommendation. Weill Cornell has adopted two evidenced based grading systems: Oxford and CODUS.
 
 Weill Cornell has partnered with the Harvard Library of Evidence to assist us with the curation of the AUCs and grading. Additional information on the Harvard Library of Evidence may be found at:
 
